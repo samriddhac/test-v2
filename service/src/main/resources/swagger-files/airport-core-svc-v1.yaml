@@ -1,0 +1,116 @@
+swagger: '2.0'
+info:
+  description: api.description
+  version: '1.0'
+  title: airport-service
+  termsOfService: api.termsOfService
+  contact:
+    name: api.contact.name
+    url: 'http://api.contact.url'
+    email: api@demo.com
+  license:
+    name: api.license.name
+    url: 'http://api.license.url'
+host: '0.0.0.0:12060'
+basePath: /airport-service/1.0
+schemes:
+  - http
+paths:
+  /airports:
+    get:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Airport'
+      x-camelContextId: airport-service
+      x-routeId: GET /airports
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/Airport'
+      responses:
+        '201':
+          description: success
+      x-camelContextId: airport-service
+      x-routeId: POST /airports
+  '/airports/{airportId}':
+    get:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: airportId
+          in: path
+          description: ''
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: success
+          schema:
+            $ref: '#/definitions/Airport'
+      x-camelContextId: airport-service
+      x-routeId: 'GET /airports/{airportId}'
+    put:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: airportId
+          in: path
+          description: ''
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: body
+          description: ''
+          required: true
+          schema:
+            $ref: '#/definitions/Airport'
+      responses:
+        '204':
+          description: success
+      x-camelContextId: airport-service
+      x-routeId: 'PUT /airports/{airportId}'
+    delete:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: airportId
+          in: path
+          description: ''
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: success
+      x-camelContextId: airport-service
+      x-routeId: 'DELETE /airports/{airportId}'
+definitions:
+  Airport:
+    type: object
+    properties: {}
+    x-model-class: demo.cosmos.core.airport.model.Airport

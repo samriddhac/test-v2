@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<aop:config>
+				<aop:aspect id="dataLayerExceptionAspect" ref="dataExceptionHandler" order="1">
+			<aop:pointcut id="dataLayerPointCut" expression="execution(* demo.op.core.airport.core.svc.v1.dao.impl.AirportCoreSvcV1CoreDaoImpl.*(..))"/>
+        	<aop:after-throwing pointcut-ref="dataLayerPointCut" method="handleException" throwing="error"/>
+		</aop:aspect>
+		<aop:aspect id="serviceLayerExceptionAspect" ref="serviceExceptionHandler" order="2">
+			<aop:pointcut id="serviceLayerPointCut" expression="execution(* demo.op.core.airport.core.svc.v1.service.impl.AirportCoreSvcV1CoreServiceImpl.*(..))"/>
+        	<aop:after-throwing pointcut-ref="serviceLayerPointCut" method="handleException" throwing="error"/>
+		</aop:aspect>
+		<aop:aspect id="controllerLayerExceptionAspect" ref="controllerExceptionHandler" order="3">
+			<aop:pointcut id="controllerLayerPointCut" expression="execution(* demo.op.core.airport.core.svc.v1.controller.AirportCoreSvcV1CoreServiceController.*(..))"/>
+        	<aop:after-throwing pointcut-ref="controllerLayerPointCut" method="handleException" throwing="error"/>
+		</aop:aspect>
+	</aop:config>
+
+	<bean id="dataExceptionHandler" class="demo.op.core.airport.core.svc.v1.exception.impl.DataExceptionHandler" />
+	<bean id="serviceExceptionHandler" class="demo.op.core.airport.core.svc.v1.exception.impl.ServiceExceptionHandler" />
+	<bean id="controllerExceptionHandler" class="demo.op.core.airport.core.svc.v1.exception.impl.ControllerExceptionHandler" />
+</beans>
