@@ -1,0 +1,102 @@
+swagger: '2.0'
+produces:
+  - application/json
+consumes:
+  - application/json
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    description: ''
+    type: apiKey
+security:
+  - Bearer: []
+basePath: /order-collector-service/1.0
+host: '0.0.0.0:12090'
+schemes:
+  - http
+info:
+  title: order-collector-service
+  version: '1.0'
+  description: This API helps in enriching the order lines and saving the order in database
+  contact:
+    name: abcd
+    url: 'http://api.abcd.com'
+    email: api@abcd.com
+  license:
+    name: Proprietary
+    url: 'http://license.abcd.com'
+paths:
+  /orders/collect:
+    post:
+      operationId: collectOrder
+      description: ''
+      parameters:
+        - $ref: '#/parameters/OrderId_HEADER'
+        - $ref: '#/parameters/MessageId_HEADER'
+        - $ref: '#/parameters/CorrelationId_HEADER'
+        - $ref: '#/parameters/ClientId_HEADER'
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/OrderOne'
+      responses:
+        '200':
+          description: Order Collected
+          headers: {}
+          schema:
+            $ref: '#/definitions/OrderOne'
+      tags: []
+    put:
+      operationId: updateOrder
+      description: ''
+      parameters:
+        - $ref: '#/parameters/OrderId_HEADER'
+        - $ref: '#/parameters/MessageId_HEADER'
+        - $ref: '#/parameters/CorrelationId_HEADER'
+        - $ref: '#/parameters/ClientId_HEADER'
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/OrderTwo'
+      responses:
+        '200':
+          description: Order Collected
+          headers: {}
+          schema:
+            $ref: '#/definitions/OrderTwo'
+      tags: []
+parameters:
+  OrderId_HEADER:
+    in: header
+    name: OrderId
+    type: string
+    required: false
+  MessageId_HEADER:
+    in: header
+    name: MessageId
+    type: string
+    required: false
+  CorrelationId_HEADER:
+    in: header
+    name: CorrelationId
+    type: string
+    required: false
+  ClientId_HEADER:
+    in: header
+    name: ClientId
+    type: string
+    required: false
+definitions:
+  OrderOne:
+    description: ''
+    type: object
+    properties: {}
+    x-model-class: com.abcd.uop.model.Order
+  OrderTwo:
+    description: ''
+    type: object
+    properties: {}
+    x-model-class: com.abcd.oop.model.Order
