@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+    <parent>
+		<groupId>demo.op</groupId>
+		<artifactId>core-parent</artifactId>
+		<version>1.0.0</version>
+	</parent> 
+	
+	<groupId>demo.op</groupId>
+	<artifactId>order-core-v1</artifactId>
+	<version>${project.version}</version>
+	<packaging>pom</packaging>
+	<name>order-core-v1</name>
+	
+	<properties>
+        <project.version>1.0.0</project.version>
+        <java.version>1.8</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<sonar.exclusions>
+            	  	 **/dao/*.java,
+           	 		 **/utils/*.java,
+                	 **/entity/*.java,
+            	  	 **/model/*.java,
+            	  	 **/mapper/*.java,
+            	  	 **/controller/*.java
+       	</sonar.exclusions>
+    </properties>    
+   
+    <distributionManagement>
+        <repository>
+            <id>MacysNexus</id>
+            <layout>default</layout>
+            <name>Macys Nexus Deploy Repo</name>
+            <url>${releaseDistributionLocaltion}</url>
+        </repository>
+        <snapshotRepository>
+            <id>MacysNexus</id>
+            <layout>default</layout>
+            <uniqueVersion>false</uniqueVersion>
+            <name>Macys Nexus Deploy Repo</name>
+            <url>${snapshotDistributionLocaltion}</url>
+        </snapshotRepository>
+        <site>
+            <id>ReportsLocation</id>
+            <name>Report Locations</name>
+            <url>${siteDistributionLocaltion}</url>
+        </site>
+    </distributionManagement>
+    
+	<modules>
+		<module>service</module>
+		<module>functional-test</module>
+		<module>config</module>
+	</modules>
+	
+</project>
