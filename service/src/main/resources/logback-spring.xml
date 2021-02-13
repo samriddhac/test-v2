@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/cloud/gcp/autoconfigure/logging/logback-appender.xml" />
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    
+    <logger name="demo.op.core.group.core.svc.v1" level="INFO" additivity="false">         
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="STACKDRIVER" />
+    </logger> 
+    
+    <logger name="org.springframework" level="INFO" additivity="false">         
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="STACKDRIVER" />
+    </logger> 
+
+    <root level="INFO">        
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="STACKDRIVER" />
+    </root>
+</configuration>
