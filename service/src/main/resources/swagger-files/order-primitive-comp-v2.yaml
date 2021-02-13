@@ -1,0 +1,61 @@
+swagger: '2.0'
+produces:
+  - application/json
+consumes:
+  - application/json
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    description: ''
+    type: apiKey
+security:
+  - Bearer: []
+basePath: /order-core
+host: 0.0.0.0
+schemes:
+  - http
+info:
+  title: order-core-service
+  version: '1.0'
+  description: This API helps in getting the order service.
+  contact:
+    name: abcd
+    url: 'http://api.abcd.com'
+    email: api@abcd.com
+  license:
+    name: Proprietary
+    url: 'http://license.abcd.com'
+paths:
+  /op/v1/order/orderid:
+    get:
+      operationId: getOrderIdForCustomerOrderIdOrReservationId
+      description: getOrderIdForCustomerOrderIdOrReservationId
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: customerOrderId
+          in: query
+          description: customerOrderId
+          required: false
+          type: string
+          default: '1'
+        - name: reservationId
+          in: query
+          description: reservationId
+          required: false
+          type: string
+          default: '1'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: number
+definitions:
+  Order:
+    description: ''
+    type: object
+    properties: {}
+    x-model-class: com.abcd.uop.model.Order
