@@ -1,0 +1,62 @@
+swagger: '2.0'
+produces:
+  - application/json
+consumes:
+  - application/json
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    description: ''
+    type: apiKey
+security:
+  - Bearer: []
+basePath: /releasegroup
+host: 0.0.0.0
+schemes:
+  - http
+info:
+  description: ''
+  version: 0.0.1
+  title: Releasegroup-Service
+  contact:
+    name: abcd
+    url: 'http://api.abcd.com'
+    email: api@abcd.com
+  license:
+    name: Proprietary
+    url: 'http://license.abcd.com'
+paths:
+  /op/v1/order/release/logicalshipments:
+    post:
+      operationId: groupLogicalShipments
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: lineItemArray
+          description: lineItemArray
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Order'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: array
+              items:
+                $ref: '#/definitions/Order'
+        '201':
+          description: Created
+definitions:
+  Order:
+    description: ''
+    type: object
+    properties: {}
+    x-model-class: com.abcd.uop.model.Order
