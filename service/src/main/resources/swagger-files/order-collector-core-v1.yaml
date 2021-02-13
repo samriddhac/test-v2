@@ -1,0 +1,52 @@
+swagger: '2.0'
+produces:
+  - application/json
+consumes:
+  - application/json
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    description: ''
+    type: apiKey
+security:
+  - Bearer: []
+basePath: /order-service/1.0
+host: '0.0.0.0:12060'
+schemes:
+  - http
+info:
+  title: order-service
+  version: '1.0'
+  description: This API helps in saving the order
+  contact:
+    name: Macys
+    url: 'http://api.macys.com'
+    email: api@macys.com
+  license:
+    name: Proprietary
+    url: 'http://license.macys.com'
+paths:
+  /orders:
+    post:
+      operationId: createOrder
+      description: ''
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Order'
+      responses:
+        '201':
+          description: Order Created
+          headers: {}
+          schema:
+            $ref: '#/definitions/Order'
+      tags: []
+definitions:
+  Order:
+    description: ''
+    type: object
+    properties: {}
+    x-model-class: com.macys.uop.model.Order
